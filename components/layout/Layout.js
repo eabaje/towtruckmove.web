@@ -7,7 +7,10 @@ import Footer from "./Footer";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-const Layout = ({ children, title = "Book Best Hotels for your Holiday" }) => {
+const Layout = ({
+  children,
+  title = "TowTruckMove-Your best partner in vehicle emergency management",
+}) => {
   return (
     <>
       <Head>
