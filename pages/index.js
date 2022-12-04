@@ -33,7 +33,6 @@ function Index() {
 
   const loadJs = () => {
     if (jQuery().appear) {
-      alert("hi");
       jQuery(".to_animate").appear();
       jQuery(".to_animate")
         .filter(":appeared")

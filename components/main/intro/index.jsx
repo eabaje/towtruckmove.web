@@ -275,8 +275,8 @@ function Intro() {
                   minHeight: `230px`,
                 }}
               >
-                <h5 className="text-light">Dhaka - Chittagong</h5>
-                <h6 className="text-light fw-normal fs-0">From $100</h6>
+                <h5 className="text-light">Mile 2</h5>
+                <h6 className="text-light fw-normal fs-0">Contact</h6>
                 <i className="fas fa-arrow-right text-light mt-4"></i>
                 <a className="stretched-link" href="#!"></a>
               </div>
@@ -289,8 +289,8 @@ function Intro() {
                   minHeight: `230px`,
                 }}
               >
-                <h5 className="text-light">Dhaka - Sylhet</h5>
-                <h6 className="text-light fw-normal fs-0">From $100</h6>
+                <h5 className="text-light">Oyingbo</h5>
+                <h6 className="text-light fw-normal fs-0">Contact</h6>
                 <i className="fas fa-arrow-right text-light mt-4"></i>
                 <a className="stretched-link" href="#!"></a>
               </div>
@@ -303,8 +303,8 @@ function Intro() {
                   minHeight: `230px`,
                 }}
               >
-                <h5 className="text-light">Dhaka - Chittagong</h5>
-                <h6 className="text-light fw-normal fs-0">From $100</h6>
+                <h5 className="text-light">Third Mainland Bridge</h5>
+                <h6 className="text-light fw-normal fs-0">Contact</h6>
                 <i className="fas fa-arrow-right text-light mt-4"></i>
                 <a className="stretched-link" href="#!"></a>
               </div>
@@ -317,8 +317,8 @@ function Intro() {
                   minHeight: `230px`,
                 }}
               >
-                <h5 className="text-light">Dhaka - Chittagong</h5>
-                <h6 className="text-light fw-normal fs-0">From $100</h6>
+                <h5 className="text-light">Victoria Island Toll Plaza</h5>
+                <h6 className="text-light fw-normal fs-0">Contact</h6>
                 <i className="fas fa-arrow-right text-light mt-4"></i>
                 <a className="stretched-link" href="#!"></a>
               </div>
@@ -331,8 +331,8 @@ function Intro() {
                   minHeight: `230px`,
                 }}
               >
-                <h5 className="text-light">Dhaka - Coxs Bazar</h5>
-                <h6 className="text-light fw-normal fs-0">From $100</h6>
+                <h5 className="text-light">Egbeda</h5>
+                <h6 className="text-light fw-normal fs-0">Contact</h6>
                 <i className="fas fa-arrow-right text-light mt-4"></i>
                 <a className="stretched-link" href="#!"></a>
               </div>
@@ -345,8 +345,8 @@ function Intro() {
                   minHeight: `230px`,
                 }}
               >
-                <h5 className="text-light">Dhaka - Sylhet</h5>
-                <h6 className="text-light fw-normal fs-0">From $100</h6>
+                <h5 className="text-light">Ajao Estate</h5>
+                <h6 className="text-light fw-normal fs-0">Contact</h6>
                 <i className="fas fa-arrow-right text-light mt-4"></i>
                 <a className="stretched-link" href="#!"></a>
               </div>
@@ -359,8 +359,8 @@ function Intro() {
                   minHeight: `230px`,
                 }}
               >
-                <h5 className="text-light">Dhaka - Coxs Bazar</h5>
-                <h6 className="text-light fw-normal fs-0">From $100</h6>
+                <h5 className="text-light">Jibowu Ikorodu</h5>
+                <h6 className="text-light fw-normal fs-0">Contact</h6>
                 <i className="fas fa-arrow-right text-light mt-4"></i>
                 <a className="stretched-link" href="#!"></a>
               </div>
@@ -373,8 +373,8 @@ function Intro() {
                   minHeight: `230px`,
                 }}
               >
-                <h5 className="text-light">Dhaka - Chittagong</h5>
-                <h6 className="text-light fw-normal fs-0">From $100</h6>
+                <h5 className="text-light">Akure,Ondo State</h5>
+                <h6 className="text-light fw-normal fs-0">Contact</h6>
                 <i className="fas fa-arrow-right text-light mt-4"></i>
                 <a className="stretched-link" href="#!"></a>
               </div>
@@ -387,8 +387,8 @@ function Intro() {
                   minHeight: `230px`,
                 }}
               >
-                <h5 className="text-light">Dhaka - Coxs Bazar</h5>
-                <h6 className="text-light fw-normal fs-0">From $100</h6>
+                <h5 className="text-light">PH, Rivers State</h5>
+                <h6 className="text-light fw-normal fs-0">Contact</h6>
                 <i className="fas fa-arrow-right text-light mt-4"></i>
                 <a className="stretched-link" href="#!"></a>
               </div>
@@ -401,8 +401,8 @@ function Intro() {
                   minHeight: `230px`,
                 }}
               >
-                <h5 className="text-light">Dhaka - Sylhet</h5>
-                <h6 className="text-light fw-normal fs-0">From $100</h6>
+                <h5 className="text-light">Kano, Kano State</h5>
+                <h6 className="text-light fw-normal fs-0">Contact</h6>
                 <i className="fas fa-arrow-right text-light mt-4"></i>
                 <a className="stretched-link" href="#!"></a>
               </div>
@@ -415,8 +415,8 @@ function Intro() {
                   minHeight: `230px`,
                 }}
               >
-                <h5 className="text-light">Dhaka - Chittagong</h5>
-                <h6 className="text-light fw-normal fs-0">From $100</h6>
+                <h5 className="text-light">Lagos- Benin Expressway</h5>
+                <h6 className="text-light fw-normal fs-0">Contact</h6>
                 <i className="fas fa-arrow-right text-light mt-4"></i>
                 <a className="stretched-link" href="#!"></a>
               </div>
@@ -429,8 +429,8 @@ function Intro() {
                   minHeight: `230px`,
                 }}
               >
-                <h5 className="text-light">Dhaka - Coxs Bazar</h5>
-                <h6 className="text-light fw-normal fs-0">From $100</h6>
+                <h5 className="text-light">Abuja</h5>
+                <h6 className="text-light fw-normal fs-0">Contact</h6>
                 <i className="fas fa-arrow-right text-light mt-4"></i>
                 <a className="stretched-link" href="#!"></a>
               </div>

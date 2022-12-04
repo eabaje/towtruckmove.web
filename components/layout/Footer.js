@@ -125,10 +125,7 @@ const Footer = () => {
                 class="widget-odd widget-first widget-1 widget widget_banner"
               >
                 {" "}
-                <img
-                  src="//webdesign-finder.com/towy/wp-content/uploads/2017/04/footer-logo.png"
-                  alt="Logo"
-                />
+                <img src="assets/img/gallery/logo.png" alt="Logo" />
               </div>
               <div
                 id="text-3"
@@ -137,9 +134,9 @@ const Footer = () => {
                 {" "}
                 <div class="textwidget">
                   <p>
-                    Shank duis pancetta kevin ullamco tempor short loin pig
-                    lorem officia ut ham hock incididunt irure drumstick sage
-                    ball tip tri-tip.
+                    TowTruckMove is your important help when caught on in the
+                    uncomfortable situation of vehicle immobility. Count on us
+                    to be a click away to help you.
                   </p>
                 </div>
               </div>
@@ -192,59 +189,38 @@ const Footer = () => {
                       id="menu-item-852"
                       class="menu-item menu-item-type-post_type menu-item-object-page menu-item-852"
                     >
-                      <a href="http://webdesign-finder.com/towy/about/">
-                        About
-                      </a>
+                      <a href="about/">About</a>
                     </li>
                     <li
                       id="menu-item-848"
                       class="menu-item menu-item-type-post_type menu-item-object-page menu-item-848"
                     >
-                      <a href="http://webdesign-finder.com/towy/faq/">FAQ</a>
+                      <a href="faq/">FAQ</a>
                     </li>
                     <li
                       id="menu-item-853"
                       class="menu-item menu-item-type-post_type menu-item-object-page menu-item-853"
                     >
-                      <a href="http://webdesign-finder.com/towy/services/">
-                        Services
-                      </a>
+                      <a href="services/">Services</a>
                     </li>
                     <li
                       id="menu-item-847"
                       class="menu-item menu-item-type-post_type menu-item-object-page menu-item-847"
                     >
-                      <a href="http://webdesign-finder.com/towy/typography/">
-                        Typography
-                      </a>
+                      <a href="typography/">Typography</a>
                     </li>
                     <li
                       id="menu-item-854"
                       class="menu-item menu-item-type-taxonomy menu-item-object-fw-portfolio-category menu-item-854"
                     >
-                      <a href="http://webdesign-finder.com/towy/portfolio/regular/">
-                        Gallery
-                      </a>
+                      <a href="gallery/">Gallery</a>
                     </li>
-                    <li
-                      id="menu-item-851"
-                      class="menu-item menu-item-type-post_type menu-item-object-page menu-item-851"
-                    >
-                      <a href="http://webdesign-finder.com/towy/blog/">Blog</a>
-                    </li>
-                    <li
-                      id="menu-item-855"
-                      class="menu-item menu-item-type-custom menu-item-object-custom menu-item-855"
-                    >
-                      <a href="index.php/404">404</a>
-                    </li>
+
                     <li
                       id="menu-item-849"
                       class="menu-item menu-item-type-post_type menu-item-object-page menu-item-849"
                     >
-                      <a href="http://webdesign-finder.com/towy/contacts/">
-                        Contacts
-                      </a>
+                      <a href="contact/">Contacts</a>
                     </li>
                   </ul>
                 </div>
@@ -264,7 +240,7 @@ const Footer = () => {
                       <i class="fa fa-map-marker highlight fontsize_18"></i>
                     </div>
                     <div class="media-body">
-                      <span class="grey">2551 Alfred Drive Brooklyn, NY </span>
+                      <span class="grey">52A Ikorodu Road Jibowu,Lagos </span>
                     </div>
                   </li>
                   <li>
@@ -273,7 +249,9 @@ const Footer = () => {
                     </div>
                     <div class="media-body">
                       <span class="grey">
-                        <a href="mailto:support@towy.com">support@towy.com</a>{" "}
+                        <a href="mailto:support@towtruckmove.ng">
+                          support@towtruckmove.ng
+                        </a>{" "}
                       </span>
                     </div>
                   </li>
@@ -282,7 +260,7 @@ const Footer = () => {
                       <i class="fa fa-phone highlight fontsize_18"></i>
                     </div>
                     <div class="media-body">
-                      <span class="grey">718-250-4467 </span>
+                      <span class="grey">+234------- </span>
                     </div>
                   </li>
                   <li>
@@ -316,9 +294,8 @@ const Footer = () => {
                       </div>
                       <div class="tweet_right">
                         <span class="tweet_text">
-                          Design tools in WordPress 6.1 bring you more ways to
-                          adjust, customize, and experiment with the look and
-                          feel of yo…{" "}
+                          TowtruckMove has saved me when in distress on Third
+                          Mainland bridge{" "}
                           <a href="https://t.co/MtCSyDL2jg" rel="nofollow">
                             https://t.co/MtCSyDL2jg
                           </a>{" "}
@@ -339,12 +316,7 @@ const Footer = () => {
                       </div>
                       <div class="tweet_right">
                         <span class="tweet_text">
-                          Did you know that you can create all sorts of
-                          interesting art with blocks in #WordPress? The
-                          possibilities are wild…{" "}
-                          <a href="https://t.co/6tmhQlc1Nn" rel="nofollow">
-                            https://t.co/6tmhQlc1Nn
-                          </a>{" "}
+                          You can't go wrong with TowTruckMove{" "}
                         </span>
                         <span class="tweet_time">
                           November 16, 2022 5:46 pm{" "}

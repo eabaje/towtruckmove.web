@@ -56,7 +56,7 @@ const BookForm = (props) => {
   const [showCompany, setShowCompany] = useState(false);
   const [showReference, setShowReference] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
-  // const [showProfile, setShowProfile] = useState(false);
+  const [amt, setAmt] = useState(0);
 
   function onChange(event) {
     setValues(event.target.value);
