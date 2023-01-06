@@ -243,7 +243,7 @@ const BookForm = (props) => {
     publicKey: Public_Key,
   };
 
-  const initializePayment = usePaystackPayment(config);
+  //const initializePayment = usePaystackPayment(config);
 
   const onSuccess = (reference) => {
     // Implementation for whatever you want to do with reference and after success call.
