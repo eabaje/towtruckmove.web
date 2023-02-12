@@ -93,6 +93,11 @@ class MyDocument extends Document {
           {/* <script src="assets/js/bootstrap.min.js"></script> */}
           <script src="vendors/fontawesome/all.min.js"></script>
 
+          <script
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAH0EZbU6ABTMZ38hi1kD_6QeMdavPgBHA&libraries=places&callback=initMap"
+            async
+          ></script>
+
           {/* <script src="assets/js/main.js"></script> */}
         </body>
       </Html>

@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useState, useContext, useEffect, useRef } from "react";
 //import { IMG_URL } from "../../../constants";
 import { useForm, Controller } from "react-hook-form";
 
@@ -15,17 +15,16 @@ import {
 
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-// import CustomButton from "../../../components/button/customButton";
-// import ImageUpload from "../../../components/upload/uploadImage";
-//import "../../../styles/form.module.css";
-// import { SPECIALIZATION_TYPE } from "../../../constants/enum";
-// import CustomPopup from "../../../components/popup/popup.component";
-// import UpdateUserFileUpload from "../../../components/upload/edit-user-file-upload";
+
 import { toast } from "react-toastify";
 import dynamic from "next/dynamic";
 import { usePaystackPayment } from "react-paystack";
 import { Public_Key } from "../../../constants";
 import { createPayment } from "../../../context/actions/payment/payment.action";
+
+// import findNearestLocation from 'map-nearest-location';
+import Geocode from "react-geocode";
+import AutoCompletePlace from "./autoCompletePlaceApi";
 
 const BookForm = (props) => {
   // const { userId, companyId } = query;
@@ -57,29 +56,28 @@ const BookForm = (props) => {
   const [showReference, setShowReference] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [amt, setAmt] = useState(0);
-
-  function onChange(event) {
-    setValues(event.target.value);
-    // state.companyUser.Specilaization =
-    //   event.target.options[event.target.selectedIndex].text;
-    // console.log(
-    //   "value:",
-    //   event.target.options[event.target.selectedIndex].text
-    //);
-  }
-
-  // Messages
-  const required = "This field is required";
-  const maxLength = "Your input exceed maximum length";
-
-  // Error Component
-  const errorMessage = (error) => {
-    return (
-      <p className="invalid-feedback" style={{ color: "red" }}>
-        {error}
-      </p>
-    );
-  };
+  const [myLocation, setMylocation] = useState(null);
+  const [myPosition, setMyPosition] = useState(null);
+  const [nearestLocation, setNearestLocation] = useState(null);
+  const [status, setStatus] = useState(null);
+  const locations = [
+    {
+      lat: 40.7722691,
+      lng: -74.3008176,
+    },
+    {
+      lat: 40.682638,
+      lng: -73.941015,
+    },
+    {
+      lat: 40.870347,
+      lng: -74.10581,
+    },
+    {
+      lat: 40.7374197,
+      lng: -74.2719785,
+    },
+  ];
 
   const popupCloseHandler = (e) => {
     PopUpClose()(userDispatch);
@@ -103,33 +101,14 @@ const BookForm = (props) => {
   const changeAccount = async () => {
     setShowProfile(!showProfile);
   };
-  const changeCompany = async () => {
-    setShowCompany(!showCompany);
-  };
+
   const changeBilling = async () => {
     setShowBilling(!showBilling);
   };
   const changeReference = async () => {
     setShowReference(!showReference);
   };
-
-  const [rowsData, setRowsData] = useState([]);
-
-  const addTableRows = () => {
-    const rowsInput = {
-      FirstName: "",
-      LastName: "",
-      MiddleName: "",
-      NickName: "",
-    };
-    setRowsData([...rowsData, rowsInput]);
-  };
-
-  const deleteTableRows = (index) => {
-    const rows = [...rowsData];
-    rows.splice(index, 1);
-    setRowsData(rows);
-  };
+  const googleButton = useRef(null);
 
   const {
     register,
@@ -146,63 +125,16 @@ const BookForm = (props) => {
     authState: { user },
   } = useContext(GlobalContext);
 
-  const getCompany = (companyId) => {
-    fetchData(
-      "user/findCompany",
-      companyId
-    )((company) => {
-      console.log("company", company);
-      setCompanyInfo(company);
-      const fields2 = [
-        "CompanyName",
-        "ContactEmail",
-        "ContactPhone",
-        "Address",
-        "Region",
-        "Country",
-        "CompanyType",
-        "Specialization",
-        "RoleType",
-        "Website",
-      ];
-      fields2.forEach((field2) => setValue(field2, company[field2]));
-    })((err) => {
-      toast.error(err);
-    });
-  };
-
   useEffect(() => {
-    addTableRows();
-    setCountries((countries) => (countries = Country.getAllCountries()));
-    // fetchData(
-    //   "user/findOne",
-    //   userId
-    // )((user) => {
-    //   setProfile(user);
-    //   getCompany(user.CompanyId);
-    //   const fields = [
-    //     "FullName",
-    //     "Email",
-    //     "DOB",
-    //     "Address",
-    //     "City",
-    //     "Country",
-    //     "Phone",
-    //     "PicUrl",
-    //   ];
-    //   fields.forEach((field) => setValue(field, user[field]));
-    //   setEmail(user["Email"]);
-    //   // setcompanyId(user["CompanyId"]);
-    //   setPickUpRegion(
-    //     (pickUpRegion) =>
-    //       (pickUpRegion = State.getStatesOfCountry(user["Country"]))
-    //   );
-
-    //   setselpickUpRegion(user["Region"]);
-    // })((err) => {
-    //   toast.error(err);
-    // });
+    getLocation();
   }, []);
+
+  // useEffect(() => {
+  //    if(myLocation) {
+  //         const nearest = findNearestLocation(myLocation, locations);
+  //         setNearestLocation(nearest);
+  //    }
+  // },[myLocation]);
 
   function onSubmit(formdata) {
     // console.log(`formdata`, formdata);
@@ -271,6 +203,112 @@ const BookForm = (props) => {
       toast.error(err);
     });
   };
+
+  const calcDistance = () => {};
+
+  const getLocation = () => {
+    if (!navigator.geolocation) {
+      setStatus("Geolocation is not supported by your browser");
+    } else {
+      setStatus("Locating...");
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          setStatus(null);
+          getAddressByCoordinate(position);
+
+          setMylocation({
+            lat: position.coords.latitude,
+            lng: position.coords.longitude,
+          });
+        },
+        () => {
+          toast.error("Unable to retrieve your location");
+          setStatus("Unable to retrieve your location");
+        }
+      );
+    }
+  };
+
+  const getAddressByCoordinate = (position) => {
+    Geocode.fromLatLng(position.lat(), position.lng()).then(
+      (response) => {
+        setMyPosition(response.results[0].formatted_address);
+
+        const address = response.results[0].formatted_address;
+        toast.success(address);
+        console.log(address);
+      },
+      (error) => {
+        console.error(error);
+      }
+    );
+  };
+
+  const findNearestPark = () => {
+    //find nearest towing park?
+    var locations = []; // your locations array
+    var nearestLocations = [];
+    for (let step = 0; step < 5; step++) {
+      // check if locations are exhausted
+      if (locations.length == 0) break;
+      // get the nearest location
+      // let nearest = findNearestLocation(myLocation, locations);
+      // push the nearest location
+      //  nearestLocations.push(nearest);
+      // remove the retrieved location from the locations array
+      locations = locations.filter(function (location) {
+        return location.lat !== nearest.lat && location.lng !== nearest.lng;
+      });
+    }
+    // after the loop completes; you can print the array to view the nearest locations.
+    console.log(nearestLocations);
+
+    // Sort your locations array by distance (nearest to furthest)
+    var myLocation = locations.sort(function (a, b) {
+      // get your current location
+      let distanceA = haversineDistance(myLocation, a);
+      let distanceB = haversineDistance(myLocation, b);
+      // Compare the 2 distances
+      if (distanceA < distanceB) return -1;
+      if (distanceA > distanceB) return 1;
+      return 0;
+    });
+  };
+
+  function haversineDistance(coords1, coords2, isMiles = false) {
+    function toRad(x) {
+      return (x * Math.PI) / 180;
+    }
+
+    var lon1 = coords1[0];
+    var lat1 = coords1[1];
+
+    var lon2 = coords2[0];
+    var lat2 = coords2[1];
+
+    var R = 6371; // km
+
+    var x1 = lat2 - lat1;
+    var dLat = toRad(x1);
+    var x2 = lon2 - lon1;
+    var dLon = toRad(x2);
+    var a =
+      Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+      Math.cos(toRad(lat1)) *
+        Math.cos(toRad(lat2)) *
+        Math.sin(dLon / 2) *
+        Math.sin(dLon / 2);
+    var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+    var d = R * c;
+
+    if (isMiles) d /= 1.60934;
+
+    return d;
+  }
+
+  const getCurrentLocation = () => {};
+
+  const showGoogleMap = () => {};
 
   const CustomInput = React.forwardRef(({ value, onClick }, ref) => {
     return (
@@ -368,18 +406,19 @@ const BookForm = (props) => {
                       className="form-label visually-hidden"
                       for="FromWhere"
                     >
-                      Address 1
+                      Your Location
                     </label>
-                    <input
-                      className="form-control input-box form-voyage-control"
+                    <AutoCompletePlace
+                      name={"FromWhere"}
+                      className="form-control input-box form-voyage-control "
                       id="FromWhere"
-                      name="FromWhere"
                       type="text"
                       placeholder="From where"
                       {...register("FromWhere", {
                         required: true,
                       })}
                     />
+
                     <span className="nav-link-icon text-800 fs--1 input-box-icon">
                       <i className="fas fa-map-marker-alt"></i>
                     </span>
@@ -388,18 +427,19 @@ const BookForm = (props) => {
                 <div className="col-sm-12 col-md-12 col-xl-12">
                   <div className="input-group-icon">
                     <label className="form-label visually-hidden" for="ToWhere">
-                      Address 2
+                      Desination
                     </label>
-                    <input
-                      className="form-control input-box form-voyage-control"
+                    <AutoCompletePlace
+                      name={"ToWhere"}
+                      className="form-control input-box form-voyage-control "
                       id="ToWhere"
-                      name="ToWhere"
                       type="text"
                       placeholder="To where"
                       {...register("ToWhere", {
                         required: true,
                       })}
                     />
+
                     <span className="nav-link-icon text-800 fs--1 input-box-icon">
                       <i className="fas fa-map-marker-alt"> </i>
                     </span>
