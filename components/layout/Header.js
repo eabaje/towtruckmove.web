@@ -3,18 +3,31 @@ import Link from "next/link";
 
 import { useDispatch, useSelector } from "react-redux";
 import { loadUser } from "../../redux/actions/userActions";
-import { signOut } from "next-auth/client";
+//import { signOut } from "next-auth/client";
+import LoginHooks from "../form/book/login";
+import { useSession, signIn, signOut } from "next-auth/client";
 
 const Header = () => {
+  const { data: session, status } = useSession();
+  const loading = status === "loading";
+  const handleSignin = (e) => {
+    e.preventDefault();
+    signIn();
+  };
+
+  const handleSignout = (e) => {
+    e.preventDefault();
+    signOut();
+  };
   const dispatch = useDispatch();
 
-  const { user, loading } = useSelector((state) => state.loadedUser);
+  // const { user, loading } = useSelector((state) => state.loadedUser);
 
-  useEffect(() => {
-    if (!user) {
-      dispatch(loadUser());
-    }
-  }, [dispatch, user]);
+  // useEffect(() => {
+  //   if (!user) {
+  //     dispatch(loadUser());
+  //   }
+  // }, [dispatch, user]);
 
   const logoutHandler = () => {
     signOut();
@@ -86,9 +99,26 @@ const Header = () => {
             <button class="btn text-800 order-1 order-lg-0 me-2" type="button">
               Support
             </button>
-            <button class="btn btn-voyage-outline order-0" type="submit">
-              <span class="text-primary">Sign in</span>
-            </button>
+            {/* {loading && <div className={styles.title}>Loading...</div>} */}
+
+            {session && (
+              <>
+                <p style={{ marginBottom: "10px" }}>
+                  {" "}
+                  Welcome, {session.user.name ?? session.user.email}
+                </p>{" "}
+                <br />
+                {/* <img src={session.user.image} alt="" className={styles.avatar} /> */}
+                <a
+                  href="javascript:void();"
+                  onClick={handleSignout}
+                  className="btn-signin"
+                >
+                  Sign out
+                </a>
+              </>
+            )}
+            {!session && <LoginHooks />}
           </form>
         </div>
       </div>

@@ -2,11 +2,35 @@ import "../styles/globals.css";
 import GlobalProvider from "../context/Provider";
 
 import { wrapper } from "../redux/store";
+import { StateMachineProvider, createStore } from "little-state-machine";
 
 const App = ({ Component, pageProps }) => {
+  createStore({
+    TowUser: {
+      Name: "",
+      Location: "",
+      ContactPhone: "",
+      CompanyAddress: "",
+      Country: "",
+      Region: "",
+      CompanyType: "",
+      Specilaization: "",
+      RoleType: "",
+      FullName: "",
+      Address: "",
+      Email: "",
+      Phone: "",
+      Website: "",
+      PaymentMethod: "",
+      Currency: "",
+    },
+  });
+
   return (
     <GlobalProvider>
-      <Component {...pageProps} />
+      <StateMachineProvider>
+        <Component {...pageProps} />
+      </StateMachineProvider>
     </GlobalProvider>
   );
 };

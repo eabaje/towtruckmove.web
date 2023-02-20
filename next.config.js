@@ -1,6 +1,8 @@
 module.exports = {
   env: {
     API_ENDPOINT: process.env.API_ENDPOINT,
+    GOOGLE_CLIENT_ID: process.env.GOOGLE_CLIENT_ID,
+    FACEBOOK_CLIENT_ID: process.env.FACEBOOK_CLIENT_ID,
   },
   // async redirects() {
   //   // return [
