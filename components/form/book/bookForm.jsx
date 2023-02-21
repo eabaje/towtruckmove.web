@@ -234,7 +234,7 @@ const BookForm = (props) => {
   const getAddressByCoordinate = (position) => {
     Geocode.fromLatLng(position.lat(), position.lng()).then(
       (response) => {
-        alert(response.results[0].formatted_address);
+        alert(response);
         setMyPosition(response.results[0].formatted_address);
 
         const address = response.results[0].formatted_address;
