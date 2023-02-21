@@ -215,6 +215,7 @@ const BookForm = (props) => {
       navigator.geolocation.getCurrentPosition(
         (position) => {
           setStatus(null);
+          alert(position.coords.latitude);
           getAddressByCoordinate(position);
 
           setMylocation({
