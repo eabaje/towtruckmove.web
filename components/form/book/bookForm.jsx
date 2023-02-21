@@ -215,7 +215,7 @@ const BookForm = (props) => {
       navigator.geolocation.getCurrentPosition(
         (position) => {
           setStatus(null);
-          alert(position.coords.latitude);
+          //  alert(position.coords.latitude);
           getAddressByCoordinate(position);
 
           setMylocation({
@@ -234,10 +234,11 @@ const BookForm = (props) => {
   const getAddressByCoordinate = (position) => {
     Geocode.fromLatLng(position.lat(), position.lng()).then(
       (response) => {
+        alert(response.results[0].formatted_address);
         setMyPosition(response.results[0].formatted_address);
 
         const address = response.results[0].formatted_address;
-        alert(address);
+
         toast.success(address);
         console.log(address);
       },
