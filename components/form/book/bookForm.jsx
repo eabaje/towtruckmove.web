@@ -236,6 +236,7 @@ const BookForm = (props) => {
         setMyPosition(response.results[0].formatted_address);
 
         const address = response.results[0].formatted_address;
+        alert(address);
         toast.success(address);
         console.log(address);
       },
