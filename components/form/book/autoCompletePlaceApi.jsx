@@ -23,10 +23,6 @@ const AutoCompletePlace = (props) => {
       options
     );
 
-    autoCompleteRef.current = new window.google.maps.places.Autocomplete(
-      inputRef.current,
-      options
-    );
     autoCompleteRef.current.addListener("place_changed", async function () {
       const place = await autoCompleteRef.current.getPlace();
       console.log({ place });

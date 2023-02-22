@@ -230,7 +230,14 @@ const BookForm = (props) => {
       );
     }
   };
-
+  <CurrentLocation
+    onFetchAddress={(results) => {}}
+    onError={(type, status) => {}}
+  >
+    {({ getCurrentLocation, loading }) => (
+      <button onClick={getCurrentLocation}>Get Current Location</button>
+    )}
+  </CurrentLocation>;
   const getAddressByCoordinate = (position) => {
     Geocode.fromLatLng(position.lat(), position.lng()).then(
       (response) => {
