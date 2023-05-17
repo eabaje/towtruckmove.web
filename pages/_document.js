@@ -94,7 +94,7 @@ class MyDocument extends Document {
           <script src="vendors/fontawesome/all.min.js"></script>
 
           <script
-            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAH0EZbU6ABTMZ38hi1kD_6QeMdavPgBHA&libraries=places,geolocation"
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAKKe9Aw0f6Oyt5wnIj7n84KwWMfoCm4uA&libraries=places,geolocation"
             async
           ></script>
 
