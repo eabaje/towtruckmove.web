@@ -12,7 +12,7 @@ const AutoCompletePlace = (props) => {
   const autoCompleteRef = useRef();
   const inputRef = useRef();
   const options = {
-    componentRestrictions: { country: "ng" },
+    componentRestrictions: { country: "ca" },
     fields: ["address_components", "geometry", "icon", "name"],
     types: ["establishment"],
   };
