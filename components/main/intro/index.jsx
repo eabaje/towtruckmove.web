@@ -1,6 +1,7 @@
 import React from "react";
 import Link from "next/link";
 import BookForm from "../../form/book/bookForm";
+import RegisterForm from "../../form/register/registerform";
 function Intro() {
   return (
     <>
@@ -256,7 +257,7 @@ function Intro() {
           </div>
         </div>
       </section>
-
+      <RegisterForm/>
       <section className="py-0" id="flights">
         <div className="container-fluid">
           <div className="row h-100">

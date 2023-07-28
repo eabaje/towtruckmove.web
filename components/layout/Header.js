@@ -5,7 +5,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { loadUser } from "../../redux/actions/userActions";
 //import { signOut } from "next-auth/client";
 import LoginHooks from "../form/book/login";
-import { useSession, signIn, signOut } from "next-auth/client";
+import { useSession, signIn, signOut } from "next-auth/react";
+import popupCenter from "../popup/popUpCenter";
 
 const Header = () => {
   const { data: session, status } = useSession();
@@ -32,7 +33,32 @@ const Header = () => {
   const logoutHandler = () => {
     signOut();
   };
+  const popupCenter = (url, title) => {
+    const dualScreenLeft = window.screenLeft ?? window.screenX;
+    const dualScreenTop = window.screenTop ?? window.screenY;
 
+    const width =
+      window.innerWidth ?? document.documentElement.clientWidth ?? screen.width;
+
+    const height =
+      window.innerHeight ??
+      document.documentElement.clientHeight ??
+      screen.height;
+
+    const systemZoom = width / window.screen.availWidth;
+
+    const left = (width - 500) / 2 / systemZoom + dualScreenLeft;
+    const top = (height - 550) / 2 / systemZoom + dualScreenTop;
+
+    const newWindow = window.open(
+      url,
+      title,
+      `width=${500 / systemZoom},height=${550 / systemZoom
+      },top=${top},left=${left}`
+    );
+
+    newWindow?.focus();
+  };
   return (
     <nav
       class="navbar navbar-expand-lg navbar-light fixed-top py-3 d-block"
@@ -94,11 +120,19 @@ const Header = () => {
                 <span class="nav-link-text">Activities</span>
               </a>
             </li>
+
+             <li class="nav-item px-2">
+              <a class="nav-link" href="#register">
+                <span class="nav-link-icon text-800 me-1 fas fa-bolt"></span>
+                <span class="nav-link-text">Be a Tow Trucker</span>
+              </a>
+            </li>
           </ul>
           <form>
             <button class="btn text-800 order-1 order-lg-0 me-2" type="button">
-              Support
+              
             </button>
+           
             {/* {loading && <div className={styles.title}>Loading...</div>} */}
 
             {session && (
@@ -118,7 +152,11 @@ const Header = () => {
                 </a>
               </>
             )}
-            {!session && <LoginHooks />}
+            {!session &&  <button onClick={() => popupCenter("/signIn", "Tow Truck Move")} >
+              Sign In with Google
+           </button>}
+           
+       
           </form>
         </div>
       </div>

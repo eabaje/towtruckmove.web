@@ -29,15 +29,7 @@ export default function LoginForm() {
 
   const onSubmit = async (formdata) => {
     signin2(formdata)(authDispatch)((res) => {
-      // res.user.isConfirmed === true
-      //   ? res.user.isActivated === true
-      //     ? router.push(`/dashboard/`)
-      //     : res.user.roles === "carrier"
-      //     ? (window.location.href = `/carrier/`)
-      //     : res.user.roles === "shipper"
-      //     ? (window.location.href = `/shipment/`)
-      //     : (window.location.href = `/user/user-profile/?userId=${res.user.UserId}&companyId=${res.user.CompanyId}`)
-      //   : (window.location.href = `/user/user-profile/?userId=${res.user.UserId}&companyId=${res.user.CompanyId}`);
+      
       window.location.href = "/home/?userId=" + res.user.UserId;
       // history.push("/dashboard");
     })((err) => {

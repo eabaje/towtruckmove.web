@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useGoogleLogin } from "react-google-login";
-import { useSession, signIn, signOut } from "next-auth/client";
+import { useSession, signIn, signOut } from "next-auth/react";
 
 // refresh token
 import { refreshTokenSetup } from "../../../helpers/refreshToken";

@@ -29,7 +29,7 @@ import AutoCompletePlace from "./autoCompletePlaceApi";
 
 const BookForm = (props) => {
   // const { userId, companyId } = query;
-
+  Geocode.setApiKey("AIzaSyBaQA46GMqNm3kBMpDeTs4G4fi7dK1tfao");
   // const isSingleMode = !userId;
   const [formStep, setFormStep] = useState(0);
   const [profile, setProfile] = useState({});
@@ -61,117 +61,21 @@ const BookForm = (props) => {
   const [myPosition, setMyPosition] = useState(null);
   const [nearestLocation, setNearestLocation] = useState(null);
   const [status, setStatus] = useState(null);
-  const locations = [
-    {
-      lat: 40.7722691,
-      lng: -74.3008176,
-    },
-    {
-      lat: 40.682638,
-      lng: -73.941015,
-    },
-    {
-      lat: 40.870347,
-      lng: -74.10581,
-    },
-    {
-      lat: 40.7374197,
-      lng: -74.2719785,
-    },
-  ];
 
-  const popupCloseHandler = (e) => {
-    PopUpClose()(userDispatch);
-    // setVisibility(e);
-  };
-
-  const selectCountry = async (e) => {
-    setCountry((country) => e.target.value);
-
-    setRegion((Region = State.getStatesOfCountry(e.target.value)));
-  };
-  const popupCloseHandlerImage = (e) => {
-    setVisibilityImage(e);
-  };
-  const onChangePicHandler = async (e) => {
-    setpicFile((picFile) => e.target.files[0]);
-  };
-  const changePassword = async () => {
-    setShowPassword(!showPassword);
-  };
-  const changeAccount = async () => {
-    setShowProfile(!showProfile);
-  };
-
-  const changeBilling = async () => {
-    setShowBilling(!showBilling);
-  };
-  const changeReference = async () => {
-    setShowReference(!showReference);
-  };
+  
   const googleButton = useRef(null);
 
-  const {
-    register,
-    formState: { errors4 },
-    setValue: setValue,
-    handleSubmit,
-  } = useForm();
-
-  const {
-    userDispatch,
-    userState: { User: data, loading, popUpOverLay: open },
-  } = useContext(GlobalContext);
-  const {
-    authState: { user },
-  } = useContext(GlobalContext);
-
+  
+  
   useEffect(() => {
     getLocation();
   }, []);
 
-  // useEffect(() => {
-  //    if(myLocation) {
-  //         const nearest = findNearestLocation(myLocation, locations);
-  //         setNearestLocation(nearest);
-  //    }
-  // },[myLocation]);
-
-  function onSubmit(formdata) {
-    // console.log(`formdata`, formdata);
-    return isAddMode ? null : UpdateDriver(userId, formdata);
-  }
-
-  const UpdateDriver = (data) => {
-    editUser(data)(userDispatch)((res) => {
-      //  console.log(`data`, data);
-      toast.success(`Updated  Driver-${res.data.DriverName} successfully`);
-    })((err) => {
-      toast.error(err);
-    });
-  };
-
-  function onChangePassword(formdata) {
-    formdata.Email = profile?.Email;
-    // console.log("fromPasword", formdata);
-    resetPassword(formdata)(userDispatch)((res) => {
-      toast.success(`Updated  Password successfully`);
-    })((err) => {
-      toast.error(err);
-    });
-  }
-
-  function onChangeCompany(formdata) {
-    updateCompany(formdata, formdata.CompanyId)(userDispatch)((res) => {
-      toast.success(`Updated  Company Profile successfully`);
-    })((err) => {
-      toast.error(err);
-    });
-  }
+  
 
   const config = {
     reference: new Date().getTime(),
-    email: user?.Email,
+   // email: user?.Email,
     amount: amt * 100,
     publicKey: Public_Key,
   };
@@ -187,7 +91,6 @@ const BookForm = (props) => {
       ReferenceId: reference.reference,
       OrderStatus: ORDER_STATUS.find((item) => item.text === "Processed").value,
       PaymentMethod: subscribeUser.User?.PaymentMethod,
-
       TotalPrice: amt * 100,
 
       PaymentDate: new Date(),
@@ -205,7 +108,7 @@ const BookForm = (props) => {
     });
   };
 
-  const calcDistance = () => {};
+
 
   const getLocation = () => {
     if (!navigator.geolocation) {
@@ -215,7 +118,7 @@ const BookForm = (props) => {
       navigator.geolocation.getCurrentPosition(
         (position) => {
           setStatus(null);
-          //  alert(position.coords.latitude);
+         
           getAddressByCoordinate(position);
 
           setMylocation({
@@ -232,14 +135,16 @@ const BookForm = (props) => {
   };
 
   const getAddressByCoordinate = (position) => {
-    Geocode.fromLatLng(position.lat(), position.lng()).then(
+   // alert(position.coords.latitude);
+
+    Geocode.fromLatLng(position.coords.latitude, position.coords.longitude).then(
       (response) => {
-        alert(response);
+       // alert(response);
         setMyPosition(response.results[0].formatted_address);
 
         const address = response.results[0].formatted_address;
 
-        toast.success(address);
+      //  toast.success(address);
         console.log(address);
       },
       (error) => {
@@ -248,7 +153,7 @@ const BookForm = (props) => {
     );
   };
 
-  const findNearestPark = () => {
+  const findNearestPark = (prop) => {
     //find nearest towing park?
     var locations = []; // your locations array
     var nearestLocations = [];
@@ -279,40 +184,128 @@ const BookForm = (props) => {
     });
   };
 
-  function haversineDistance(coords1, coords2, isMiles = false) {
-    function toRad(x) {
-      return (x * Math.PI) / 180;
+
+
+
+
+
+
+  const {
+    register:frmFindPark,
+    formState: { errFindPark },
+    handleSubmit: findParkHandler,
+  } = useForm();
+
+  const {
+    register: frmSelectTow,
+    formState: { errors: errSelectTow },
+    handleSubmit: selectTowHandler,
+    watch,
+  } = useForm({
+   // resolver: yupResolver(validationSchema),
+  });
+  const {
+    register: frmFinish,
+    formState: { errors: errFrmFinsih },
+    handleSubmit: finishHandler,
+  } = useForm();
+  const {
+    register: register4,
+    formState: { errors: errors4 },
+    handleSubmit: handleFinish,
+  } = useForm();
+  //{   resolver: yupResolver(validationSchema),
+  // }
+  const password = useRef({});
+  password.current = watch("password", "");
+
+  const completeFormStep = () => {
+    setFormStep((currentStep) => currentStep + 1);
+  };
+  const goBack = () => {
+    setFormStep((currentStep) => currentStep - 1);
+  };
+
+
+
+ 
+
+ 
+    const calculateDistance = () => {
+      const lat1 = 40.7128; // Latitude of location 1
+      const lon1 = -74.0060; // Longitude of location 1
+      const lat2 = 34.0522; // Latitude of location 2
+      const lon2 = -118.2437; // Longitude of location 2
+  
+      const R = 6371; // Radius of the Earth in kilometers
+      const dLat = toRadians(lat2 - lat1);
+      const dLon = toRadians(lon2 - lon1);
+  
+      const a =
+        Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+        Math.cos(toRadians(lat1)) *
+          Math.cos(toRadians(lat2)) *
+          Math.sin(dLon / 2) *
+          Math.sin(dLon / 2);
+      const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+      const distance = R * c;
+  
+      console.log(`Distance between the locations: ${distance.toFixed(2)} km`);
+    };
+  
+    const toRadians = (angle) => {
+      return (angle * Math.PI) / 180;
+    };
+  
+   
+  
+
+
+ 
+
+  const onSubmitfindPark = (data) => {
+    actions.updateAction(data);
+    completeFormStep();
+    // props.history.push("./step2");
+  };
+
+  const onSubmitselectTow = (data) => {
+    actions.updateAction(data);
+    completeFormStep();
+    // props.history.push("./step2");
+  };
+
+  const onSubmitfinish = (data) => {
+    actions.updateAction(data);
+    completeFormStep();
+    // props.history.push("./step2");
+  };
+  const onSubmitSubscribe = async (data) => {
+    actions.updateAction(data);
+    state.companyUser.PaymentMethod = paymentMethod;
+    state.companyUser.Currency = currency;
+    state.companyUser.CompanyType = data.RoleType;
+
+    setLoading(true);
+    setDisabled(true);
+    try {
+      const res = await axios.post(`${API_URL}auth/signup`, state.companyUser);
+
+      if (res) {
+        setLoading(false);
+        setDisabled(false);
+        // history.push(LOG_IN);
+        completeFormStep();
+        //  window.open(LOG_IN, "_blank");
+
+        // window.location.href = LOG_IN;
+      }
+    } catch (err) {
+      setLoading(false);
+      enqueueSnackbar(getError(err), { variant: "error" });
     }
 
-    var lon1 = coords1[0];
-    var lat1 = coords1[1];
-
-    var lon2 = coords2[0];
-    var lat2 = coords2[1];
-
-    var R = 6371; // km
-
-    var x1 = lat2 - lat1;
-    var dLat = toRad(x1);
-    var x2 = lon2 - lon1;
-    var dLon = toRad(x2);
-    var a =
-      Math.sin(dLat / 2) * Math.sin(dLat / 2) +
-      Math.cos(toRad(lat1)) *
-        Math.cos(toRad(lat2)) *
-        Math.sin(dLon / 2) *
-        Math.sin(dLon / 2);
-    var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-    var d = R * c;
-
-    if (isMiles) d /= 1.60934;
-
-    return d;
   }
-
-  const getCurrentLocation = () => {};
-
-  const showGoogleMap = () => {};
 
   const CustomInput = React.forwardRef(({ value, onClick }, ref) => {
     return (
@@ -389,20 +382,20 @@ const BookForm = (props) => {
               role="tabpanel"
               aria-labelledby="nav-home-tab"
             >
-              <form className="row g-4 mt-5" onSubmit={handleSubmit(onSubmit)}>
+              <form className="row g-4 mt-5" onSubmit={findParkHandler(onSubmitfindPark)}>
                 <input
                   type="hidden"
                   name="RelationType"
                   value={props.relationType}
                   className="form-control"
-                  {...register("relationType")}
+                  {...frmFindPark("relationType")}
                 />
                 <input
                   type="hidden"
                   name="UserId"
                   value={props.UserId}
                   className="form-control"
-                  {...register("UserId")}
+                  {...frmFindPark("UserId")}
                 />
                 <div className="col-sm-12 col-md-12 col-xl-12">
                   <div className="input-group-icon">
@@ -418,7 +411,7 @@ const BookForm = (props) => {
                       id="FromWhere"
                       type="text"
                       placeholder="From where"
-                      {...register("FromWhere", {
+                      {...frmFindPark("FromWhere", {
                         required: true,
                       })}
                     />
@@ -439,7 +432,7 @@ const BookForm = (props) => {
                       id="ToWhere"
                       type="text"
                       placeholder="To where"
-                      {...register("ToWhere", {
+                      {...frmFindPark("ToWhere", {
                         required: true,
                       })}
                     />
@@ -485,7 +478,7 @@ const BookForm = (props) => {
                       className="form-select form-voyage-select input-box"
                       id="VehicleType"
                       name="VehicleType"
-                      {...register("ToWhere", {
+                      {...frmFindPark("ToWhere", {
                         required: true,
                       })}
                     >
@@ -514,7 +507,7 @@ const BookForm = (props) => {
                       name="VehicleNumber"
                       type="text"
                       placeholder="Vehicle Number"
-                      {...register("VehicleNumber", {
+                      {...frmFindPark("VehicleNumber", {
                         required: true,
                       })}
                     />
@@ -536,7 +529,7 @@ const BookForm = (props) => {
                       id="inputPhone"
                       type="text"
                       placeholder="Phone Number"
-                      {...register("VehicleNumber", {
+                      {...frmFindPark("VehicleNumber", {
                         required: true,
                       })}
                     />
@@ -560,7 +553,7 @@ const BookForm = (props) => {
               role="tabpanel"
               aria-labelledby="nav-profile-tab"
             >
-              <form className="row g-4 mt-5">
+              <form className="row g-4 mt-5" onSubmit={selectTowHandler(onSubmitselectTow)}>
                 <div className="col-sm-12 col-md-12 col-xl-12">
                   <div className="input-group-icon">
                     <label
@@ -571,14 +564,14 @@ const BookForm = (props) => {
                     </label>
                     <select
                       className="form-select form-voyage-select input-box"
-                      id="VehicleType"
-                    >
+                      name="VehicleType"
+                  {...frmSelectTow("VehicleType")}   >
                       <option selected="selected">Park List</option>
                       <option>Sedan</option>
                       <option>SUV</option>
                       <option>Truck</option>
                       <option>Articulated Vehicle</option>
-                    </select>
+                      </select>
                     <span className="nav-link-icon text-800 fs--1 input-box-icon">
                       <i className="fas fa-truck"> </i>
                     </span>
@@ -600,7 +593,7 @@ const BookForm = (props) => {
               role="tabpanel"
               aria-labelledby="nav-contact-tab"
             >
-              <form className="row g-4 mt-5">
+              <form className="row g-4 mt-5"  onSubmit={finishHandler(onSubmitfinish)}>
                 <div className="col-12">
                   <div className="input-group-icon">
                     <input
@@ -635,12 +628,12 @@ const BookForm = (props) => {
                     </label>
                     <select
                       className="form-select form-voyage-select input-box"
-                      id="inputPeopleThree"
-                    >
+                      name="inputPeopleThree"
+                   {...frmFinish("inputPeopleThree")}    >
                       <option selected="selected">2 Adults</option>
                       <option>2 Adults 1 children</option>
                       <option>2 Adults 2 children</option>
-                    </select>
+                     </select>
                     <span className="nav-link-icon text-800 fs--1 input-box-icon">
                       <i className="fas fa-user"> </i>
                     </span>

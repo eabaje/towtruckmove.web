@@ -47,6 +47,19 @@ export const listCarriersByIdAsync = (carrierId) => async (dispatch) => {
   }
 };
 
+export const listCarriersByLocationAsync = (carrierId) => async (dispatch) => {
+  dispatch({
+    type: GET_CARRIERS_REQUEST,
+  });
+  try {
+    const { res } = await axios.get(`/carrier/findOne/${carrierId}`);
+    dispatch({ type: GET_CARRIERS_SUCCESS, payload: res.data });
+    return res.data.data;
+  } catch (error) {
+    dispatch({ type: GET_CARRIERS_FAIL, payload: error.message });
+  }
+};
+
 export const listCarriersById = (carrierId) => (dispatch) => (onSuccess) => {
   dispatch({
     type: GET_CARRIERS_REQUEST,
@@ -155,21 +168,21 @@ export const listCarrierByCriteria = (url, params) => async (dispatch) => {
   }
 };
 
+
+export const searchCarrierByLocation = (givenLatitude,givenLongitude) => async (dispatch) => {
+  dispatch({
+    type: GET_CARRIERS_REQUEST,
+  });
+  try {
+    const { res } = await axios().get(`/carrier/findCarrierByLocation/${givenLatitude}/${givenLongitude}/}`);
+
+    dispatch({ type: GET_CARRIERS_SUCCESS, payload: data });
+  } catch (error) {
+    dispatch({ type: GET_CARRIERS_FAIL, payload: error.message });
+  }
+};
 export const createCarrier1 = (form) => async (dispatch) => {
-  // const requestPayload = {
-  //   CompanyId: form.CompanyId ,
-  //   CarrierName: form.CarrierName ,
-  //   Email: form.Email || "",
-  //   Phone: form.Phone || "",
-  //   Address: form.Address || "",
-  //   City: form.City || "",
-  //   Country: form.Country || "",
-  //   Licensed: form.Licensed || "",
-  //   LicenseUrl: form.LicenseUrl || "",
-  //   Rating: form.Rating ,
-  //   CarrierDocs: form.CarrierDocs || "",
-  //   PicUrl: form.PicUrl || null,
-  // };
+ 
 
   dispatch({ type: CREATE_CARRIER_REQUEST });
 

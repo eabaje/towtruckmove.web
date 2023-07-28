@@ -1,14 +1,7 @@
 import { useRef, useEffect } from "react";
 
 const AutoCompletePlace = (props) => {
-  //  const autoCompleteRef = useRef();
-  //  const inputRef = useRef();
-  //  const options = {
-  //   componentRestrictions: { country: "ng" },
-  //   fields: ["address_components", "geometry", "icon", "name"],
-  //   types: ["establishment"]
-  //  };
-
+ 
   const autoCompleteRef = useRef();
   const inputRef = useRef();
   const options = {
