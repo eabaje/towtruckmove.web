@@ -153,36 +153,7 @@ const BookForm = (props) => {
     );
   };
 
-  const findNearestPark = (prop) => {
-    //find nearest towing park?
-    var locations = []; // your locations array
-    var nearestLocations = [];
-    for (let step = 0; step < 5; step++) {
-      // check if locations are exhausted
-      if (locations.length == 0) break;
-      // get the nearest location
-      // let nearest = findNearestLocation(myLocation, locations);
-      // push the nearest location
-      //  nearestLocations.push(nearest);
-      // remove the retrieved location from the locations array
-      locations = locations.filter(function (location) {
-        return location.lat !== nearest.lat && location.lng !== nearest.lng;
-      });
-    }
-    // after the loop completes; you can print the array to view the nearest locations.
-    console.log(nearestLocations);
-
-    // Sort your locations array by distance (nearest to furthest)
-    var myLocation = locations.sort(function (a, b) {
-      // get your current location
-      let distanceA = haversineDistance(myLocation, a);
-      let distanceB = haversineDistance(myLocation, b);
-      // Compare the 2 distances
-      if (distanceA < distanceB) return -1;
-      if (distanceA > distanceB) return 1;
-      return 0;
-    });
-  };
+  
 
 
 
