@@ -10,8 +10,8 @@ const options = {
     //   clientSecret: process.env.GITHUB_SECRET,
     // }),
     GoogleProvider({
-      clientId: process.env.GOOGLE_CLIENT_ID,
-      clientSecret: process.env.GOOGLE_SECRET,
+      clientId: process.env.G_CLIENT_ID,
+      clientSecret: process.env.G_S,
     }),
     FacebookProvider({
       clientId: process.env.FACEBOOK_CLIENT_ID,

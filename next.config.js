@@ -1,7 +1,7 @@
 module.exports = {
   env: {
     API_ENDPOINT: process.env.API_ENDPOINT,
-    GOOGLE_CLIENT_ID: process.env.GOOGLE_CLIENT_ID,
+    GOOGLE_CLIENT_ID: process.env.G_CLIENT_ID,
     FACEBOOK_CLIENT_ID: process.env.FACEBOOK_CLIENT_ID,
     MAX_DISTANCE: process.env.MAX_DISTANCE,
   },
